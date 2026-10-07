@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  body {
+    @apply bg-cream text-ink font-sans antialiased;
+    background-image:
+      radial-gradient(
+        circle at 20% 10%,
+        rgba(232, 196, 196, 0.15) 0%,
+        transparent 40%
+      ),
+      radial-gradient(
+        circle at 80% 70%,
+        rgba(201, 169, 110, 0.1) 0%,
+        transparent 40%
+      );
+    background-attachment: fixed;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply px-8 py-3 rounded-full bg-rose-deep text-white 
+           hover:bg-rose-deep/90 transition-all duration-300 
+           shadow-lg shadow-rose-deep/30 tracking-wider text-sm
+           border border-white/20 relative overflow-hidden;
+  }
+
+  .btn-outline {
+    @apply px-6 py-2 rounded-full border border-gold text-gold
+           hover:bg-gold hover:text-white transition-all duration-300
+           tracking-wider text-xs uppercase;
+  }
+
+  .section-padding {
+    @apply px-6 py-20 md:py-28 relative;
+  }
+
+  .container-narrow {
+    @apply max-w-2xl mx-auto relative z-10;
+  }
+
+  /* Ornamen divider */
+  .ornament-line {
+    @apply flex items-center justify-center gap-3 my-8;
+  }
+  .ornament-line::before,
+  .ornament-line::after {
+    content: "";
+    @apply h-px w-16 md:w-24 bg-gradient-to-r from-transparent via-gold to-transparent;
+  }
+
+  /* Card dengan border dekoratif */
+  .deco-card {
+    @apply relative bg-white rounded-2xl p-8 shadow-lg
+           border border-gold/20;
+  }
+  .deco-card::before {
+    content: "";
+    @apply absolute inset-2 border border-gold/20 rounded-xl pointer-events-none;
+  }
+
+  /* Gold text gradient */
+  .text-gold-gradient {
+    background: linear-gradient(135deg, #c9a96e 0%, #e5d4a8 50%, #c9a96e 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #faf7f2;
+}
+::-webkit-scrollbar-thumb {
+  background: #c9a96e;
+  border-radius: 4px;
+}
