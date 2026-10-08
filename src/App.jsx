@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { AnimatePresence } from "framer-motion";
 import Opening from "./components/Opening";
 import Hero from "./components/Hero";
@@ -11,6 +11,7 @@ import RSVP from "./components/RSVP";
 import Gift from "./components/Gift";
 import Wishes from "./components/Wishes";
 import Closing from "./components/Closing";
+import MusicPlayer from "./components/MusicPlayer";
 import { weddingData } from "./data/weddingData";
 import useScrollReveal from "./hooks/useScrollReveal";
 import "./Invitation.css";
@@ -18,11 +19,17 @@ import "./RoseTheme.css";
 
 export default function App() {
   const [opened, setOpened] = useState(false);
+  const musicRef = useRef(null);
   useScrollReveal(opened);
+
+  const handleOpen = () => {
+    // Panggil play() LANGSUNG di event klik user → lolos autoplay policy
+    musicRef.current?.play();
+    setOpened(true);
+  };
 
   return (
     <div className="min-h-screen bg-cream relative">
-      {/* Background ornament global */}
       <div
         className="fixed inset-0 pointer-events-none z-0 opacity-[0.03]"
         style={{
@@ -31,10 +38,10 @@ export default function App() {
         }}
       />
 
+      <MusicPlayer ref={musicRef} />
+
       <AnimatePresence>
-        {!opened && (
-          <Opening data={weddingData} onOpen={() => setOpened(true)} />
-        )}
+        {!opened && <Opening data={weddingData} onOpen={handleOpen} />}
       </AnimatePresence>
 
       {opened && (
